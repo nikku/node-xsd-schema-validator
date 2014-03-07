@@ -9,7 +9,15 @@ A (XSD) schema validator for [NodeJS](nodejs.org) that uses [Java](https://www.j
 Declare a `JAVA_HOME` environment variable that points to an installed JDK.
 
 
-## Use
+## How to Use
+
+Install via [npm](http://npmjs.org):
+
+```
+npm install --save xsd-schema-validator
+```
+
+Use in your application:
 
 ```
 var validator = require('xsd-schema-validator');
