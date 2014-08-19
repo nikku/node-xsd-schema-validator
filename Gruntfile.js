@@ -20,6 +20,15 @@ module.exports = function(grunt) {
         consolidate: true
       }
     },
+
+    release: {
+      options: {
+        tagName: 'v<%= version %>',
+        commitMessage: 'chore(project): release v<%= version %>',
+        tagMessage: 'chore(project): tag v<%= version %>'
+      }
+    },
+
     watch: {
       test: {
         files: [ 'lib/validator.js', '<%= config.tests %>/**/*.js'],
@@ -29,7 +38,7 @@ module.exports = function(grunt) {
   });
 
   // tasks
-  
+
   grunt.registerTask('test', [ 'jasmine_node' ]);
   grunt.registerTask('auto-test', [ 'jasmine_node', 'watch:test' ]);
 
