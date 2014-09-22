@@ -29,18 +29,23 @@ module.exports = function(grunt) {
       }
     },
 
+    clean: [
+      'support/XMLValidator.class'
+    ],
+
     watch: {
       test: {
         files: [ 'lib/validator.js', '<%= config.tests %>/**/*.js'],
-        tasks: [ 'jasmine_node']
+        tasks: [ 'test' ]
       }
     }
   });
 
+
   // tasks
 
-  grunt.registerTask('test', [ 'jasmine_node' ]);
-  grunt.registerTask('auto-test', [ 'jasmine_node', 'watch:test' ]);
+  grunt.registerTask('test', [ 'jasmine_node', 'clean']);
+  grunt.registerTask('auto-test', [ 'test', 'watch:test' ]);
 
   grunt.registerTask('default', [ 'test' ]);
 };

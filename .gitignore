@@ -1,3 +1,4 @@
 node_modules/
 tmp/
-support/*.class 
+support/*.class
+
