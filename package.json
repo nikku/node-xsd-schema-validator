@@ -26,8 +26,5 @@
     "grunt-jasmine-node": "~0.1.0",
     "grunt-release": "^0.7.0",
     "load-grunt-tasks": "~0.3.0"
-  },
-  "dependencies": {
-    "lodash": "~2.4.1"
   }
 }
