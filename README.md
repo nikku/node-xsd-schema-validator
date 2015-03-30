@@ -1,12 +1,14 @@
 # xsd-schema-validator
 
 
-A (XSD) schema validator for [NodeJS](nodejs.org) that uses [Java](https://www.java.com) to perform the actual schema validation.
+A (XSD) schema validator for [NodeJS](nodejs.org) that uses [Java](https://www.java.com) to perform the actual validation.
 
 
 ## Prerequisites
 
-Declare a `JAVA_HOME` environment variable that points to an installed JDK.
+Ensure a `JAVA_HOME` environment variable exists that points to an installed JDK.
+
+On some platforms, i.e. [Mac OSX](http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/) you need to define it manually.
 
 
 ## How to Use
