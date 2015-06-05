@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nikku/node-xsd-schema-validator"
+    "url": "https://github.com/nikku/node-xsd-schema-validator"
   },
   "keywords": [
     "xsd",
