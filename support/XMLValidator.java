@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
@@ -67,9 +68,14 @@ public class XMLValidator implements ErrorHandler {
 
   private static Schema loadSchema(String fileName) throws Exception {
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-    Schema schema = sf.newSchema(new File(fileName));
+    String[] schemaPaths = fileName.split("\\|");
+    ArrayList<StreamSource> schemaSources = new ArrayList<StreamSource>();
 
-    return schema;
+    for(int x=0; x<schemaPaths.length; x++){
+    	schemaSources.add(new StreamSource(schemaPaths[x]));
+    }
+    
+    return sf.newSchema(schemaSources.toArray(new StreamSource[0]));
   }
 
   private static InputStream readFromSysIn() throws IOException {
