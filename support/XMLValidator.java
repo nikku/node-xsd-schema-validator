@@ -22,7 +22,7 @@ import org.xml.sax.SAXParseException;
 
 
 public class XMLValidator implements ErrorHandler {
-
+  
   static final String END = "---end---";
 
   private boolean withErrors = false;
@@ -43,21 +43,18 @@ public class XMLValidator implements ErrorHandler {
   @Override
   public void warning(SAXParseException exception) throws SAXException {
     println("[warning] " + exception.getMessage());
-
     withErrors = true;
   }
 
   @Override
   public void error(SAXParseException exception) throws SAXException {
     println("[error] " + exception.getMessage());
-
     withErrors = true;
   }
 
   @Override
   public void fatalError(SAXParseException exception) throws SAXException {
     println("[fatal] " + exception.getMessage());
-
     withErrors = true;
   }
 
@@ -68,14 +65,11 @@ public class XMLValidator implements ErrorHandler {
   private static Schema loadSchema(String fileName) throws Exception {
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     Schema schema = sf.newSchema(new File(fileName));
-
     return schema;
   }
 
   private static InputStream readFromSysIn() throws IOException {
-
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
     StringWriter writer = new StringWriter();
 
     while (true) {
@@ -84,15 +78,12 @@ public class XMLValidator implements ErrorHandler {
       if (isInputEnd(line)) {
         break;
       }
-
       writer.append(line);
     }
-
     return new ByteArrayInputStream(writer.toString().getBytes());
   }
 
   public static void main(String[] args) throws Exception {
-
     boolean readStdin = false;
     String fileName = null;
     String schemaFile = null;
@@ -114,14 +105,6 @@ public class XMLValidator implements ErrorHandler {
       System.exit(1);
     }
 
-    InputStream inputStream;
-
-    if (readStdin) {
-      inputStream = readFromSysIn();
-    } else {
-      inputStream = new FileInputStream(fileName);
-    }
-
     XMLValidator handler = new XMLValidator();
 
     try {
@@ -129,10 +112,9 @@ public class XMLValidator implements ErrorHandler {
       Validator validator = schema.newValidator();
 
       validator.setErrorHandler(handler);
-      validator.validate(new StreamSource(inputStream));
+      validator.validate(new StreamSource(System.in));
 
       println("result=" + (handler.withErrors ? "WITH_ERRORS" : "OK"));
-
     } catch (Exception e) {
       println("[fatal] " + e.getMessage());
       println("result=FATAL_ERROR");
@@ -140,6 +122,6 @@ public class XMLValidator implements ErrorHandler {
       handler.withErrors = true;
     }
 
-    System.exit(handler.withErrors ? 1 : 0);
+  System.exit(handler.withErrors ? 1 : 0);
   }
 }
