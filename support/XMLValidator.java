@@ -104,6 +104,14 @@ public class XMLValidator implements ErrorHandler {
       println(System.err, "[error] specify schema via -schema=[SCHEMA]");
       System.exit(1);
     }
+    
+    InputStream inputStream;
+
+    if (readStdin) {
+      inputStream = readFromSysIn();
+    } else {
+      inputStream = new FileInputStream(fileName);
+    }
 
     XMLValidator handler = new XMLValidator();
 
@@ -112,10 +120,11 @@ public class XMLValidator implements ErrorHandler {
       Validator validator = schema.newValidator();
 
       validator.setErrorHandler(handler);
-      validator.validate(new StreamSource(System.in));
-
+      validator.validate(new StreamSource(inputStream));
+      inputStream.close();
       println("result=" + (handler.withErrors ? "WITH_ERRORS" : "OK"));
     } catch (Exception e) {
+      inputStream.close();
       println("[fatal] " + e.getMessage());
       println("result=FATAL_ERROR");
 
