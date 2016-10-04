@@ -22,7 +22,7 @@ import org.xml.sax.SAXParseException;
 
 
 public class XMLValidator implements ErrorHandler {
-
+  
   static final String END = "---end---";
 
   private boolean withErrors = false;
@@ -43,21 +43,18 @@ public class XMLValidator implements ErrorHandler {
   @Override
   public void warning(SAXParseException exception) throws SAXException {
     println("[warning] " + exception.getMessage());
-
     withErrors = true;
   }
 
   @Override
   public void error(SAXParseException exception) throws SAXException {
     println("[error] " + exception.getMessage());
-
     withErrors = true;
   }
 
   @Override
   public void fatalError(SAXParseException exception) throws SAXException {
     println("[fatal] " + exception.getMessage());
-
     withErrors = true;
   }
 
@@ -68,14 +65,11 @@ public class XMLValidator implements ErrorHandler {
   private static Schema loadSchema(String fileName) throws Exception {
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     Schema schema = sf.newSchema(new File(fileName));
-
     return schema;
   }
 
   private static InputStream readFromSysIn() throws IOException {
-
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
     StringWriter writer = new StringWriter();
 
     while (true) {
@@ -84,15 +78,12 @@ public class XMLValidator implements ErrorHandler {
       if (isInputEnd(line)) {
         break;
       }
-
       writer.append(line);
     }
-
     return new ByteArrayInputStream(writer.toString().getBytes());
   }
 
   public static void main(String[] args) throws Exception {
-
     boolean readStdin = false;
     String fileName = null;
     String schemaFile = null;
@@ -113,7 +104,7 @@ public class XMLValidator implements ErrorHandler {
       println(System.err, "[error] specify schema via -schema=[SCHEMA]");
       System.exit(1);
     }
-
+    
     InputStream inputStream;
 
     if (readStdin) {
@@ -130,16 +121,16 @@ public class XMLValidator implements ErrorHandler {
 
       validator.setErrorHandler(handler);
       validator.validate(new StreamSource(inputStream));
-
+      inputStream.close();
       println("result=" + (handler.withErrors ? "WITH_ERRORS" : "OK"));
-
     } catch (Exception e) {
+      inputStream.close();
       println("[fatal] " + e.getMessage());
       println("result=FATAL_ERROR");
 
       handler.withErrors = true;
     }
 
-    System.exit(handler.withErrors ? 1 : 0);
+  System.exit(handler.withErrors ? 1 : 0);
   }
 }
