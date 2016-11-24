@@ -7,9 +7,10 @@ A (XSD) schema validator for [NodeJS](nodejs.org) that uses [Java](https://www.j
 
 ## Prerequisites
 
-Ensure a `JAVA_HOME` environment variable exists that points to an installed JDK.
+This utility assumes that `javac` and `java` are on the path _or_ that
+the `JAVA_HOME` environment exists and points to an installed JDK.
 
-On some platforms, i.e. [Mac OSX](http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/) you need to define it manually.
+On some platforms, i.e. [Mac OSX](http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/) you need to define `JAVA_HOME` manually.
 
 
 ## How to Use
