@@ -45,6 +45,12 @@ var xmlStream = fs.createReadableStream('some.xml');
 validator.validateXML(xmlStream, ...);
 ```
 
+...and files, too:
+
+```javascript
+validator.validateXML({ file: 'some.xml' }, ...);
+```
+
 
 ## Why
 

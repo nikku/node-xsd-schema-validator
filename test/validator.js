@@ -113,4 +113,31 @@ describe('validator', function() {
 
   });
 
+
+  describe('should validate { file }', function() {
+
+    it('correct', function(done) {
+
+      validator.validateXML({ file: BPMN_FILE }, BPMN_SCHEMA, function(err, result) {
+
+        if (err) {
+          done(err);
+        } else {
+          expect(result.valid).toBe(true);
+          done();
+        }
+      });
+    });
+
+
+    it('broken', function(done) {
+
+      validator.validateXML({ file: INVALID_BPMN_FILE }, BPMN_SCHEMA, function(err, result) {
+        expect(err).toBeDefined();
+        done();
+      });
+    });
+
+  });
+
 });
