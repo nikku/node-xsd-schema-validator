@@ -1,5 +1,6 @@
 # xsd-schema-validator
 
+[![Build Status](https://travis-ci.org/nikku/node-xsd-schema-validator.svg?branch=master)](https://travis-ci.org/nikku/node-xsd-schema-validator)
 
 A (XSD) schema validator for [NodeJS](nodejs.org) that uses [Java](https://www.java.com) to perform the actual validation.
 
@@ -34,6 +35,15 @@ validator.validateXML(xmlStr, 'resources/foo.xsd', function(err, result) {
   result.valid; // true
 });
 ```
+
+You may validate readable streams, too:
+
+```
+var xmlStream = fs.createReadableStream('some.xml');
+
+validator.validateXML(xmlStream, ...);
+```
+
 
 ## Why
 
