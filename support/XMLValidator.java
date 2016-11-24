@@ -23,8 +23,6 @@ import org.xml.sax.SAXParseException;
 
 public class XMLValidator implements ErrorHandler {
 
-  static final String END = "---end---";
-
   private boolean withErrors = false;
 
   public XMLValidator() {
@@ -61,34 +59,11 @@ public class XMLValidator implements ErrorHandler {
     withErrors = true;
   }
 
-  private static boolean isInputEnd(String str) {
-    return str.replaceAll("[\\n\\r]+", "").equals(END);
-  }
-
   private static Schema loadSchema(String fileName) throws Exception {
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     Schema schema = sf.newSchema(new File(fileName));
 
     return schema;
-  }
-
-  private static InputStream readFromSysIn() throws IOException {
-
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
-
-    StringWriter writer = new StringWriter();
-
-    while (true) {
-      String line = reader.readLine();
-
-      if (isInputEnd(line)) {
-        break;
-      }
-
-      writer.append(line);
-    }
-
-    return new ByteArrayInputStream(writer.toString().getBytes());
   }
 
   public static void main(String[] args) throws Exception {
@@ -117,7 +92,7 @@ public class XMLValidator implements ErrorHandler {
     InputStream inputStream;
 
     if (readStdin) {
-      inputStream = readFromSysIn();
+      inputStream = System.in;
     } else {
       inputStream = new FileInputStream(fileName);
     }
