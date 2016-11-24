@@ -74,7 +74,7 @@ public class XMLValidator implements ErrorHandler {
 
   private static InputStream readFromSysIn() throws IOException {
 
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
 
     StringWriter writer = new StringWriter();
 
