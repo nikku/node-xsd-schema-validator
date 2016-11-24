@@ -22,7 +22,7 @@ npm install --save xsd-schema-validator
 
 Use in your application:
 
-```
+```javascript
 var validator = require('xsd-schema-validator');
 
 var xmlStr = '<foo:bar />';
@@ -38,7 +38,7 @@ validator.validateXML(xmlStr, 'resources/foo.xsd', function(err, result) {
 
 You may validate readable streams, too:
 
-```
+```javascript
 var xmlStream = fs.createReadableStream('some.xml');
 
 validator.validateXML(xmlStream, ...);
