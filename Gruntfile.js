@@ -11,14 +11,8 @@ module.exports = function(grunt) {
     },
 
     jasmine_node: {
-      specNameMatcher: '.*Spec',
-      projectRoot: '<%= config.tests %>',
-      jUnit: {
-        report: true,
-        savePath : 'tmp/reports/jasmine',
-        useDotNotation: true,
-        consolidate: true
-      }
+      specNameMatcher: '.*',
+      projectRoot: '<%= config.tests %>'
     },
 
     release: {
