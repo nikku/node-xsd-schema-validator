@@ -1,14 +1,9 @@
 package support;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.io.StringWriter;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
@@ -34,27 +29,42 @@ public class XMLValidator implements ErrorHandler {
     out.flush();
   }
 
-  private static void println(String msg) {
-    println(System.out, msg);
+  private static void logResult(String msg) {
+    println(System.out, "result=" + msg);
+  }
+
+  private static void logError(String type, String msg) {
+    println(System.err, String.format("[%s] %s", type, msg));
+  }
+
+  private static void logParseException(String type, SAXParseException e) {
+    logError(
+      type,
+      String.format("%s (%d:%d)",
+        e.getMessage(),
+        e.getLineNumber(),
+        e.getColumnNumber()
+      )
+    );
   }
 
   @Override
   public void warning(SAXParseException exception) throws SAXException {
-    println("[warning] " + exception.getMessage());
+    logParseException("warning", exception);
 
     withErrors = true;
   }
 
   @Override
   public void error(SAXParseException exception) throws SAXException {
-    println("[error] " + exception.getMessage());
+    logParseException("error", exception);
 
     withErrors = true;
   }
 
   @Override
   public void fatalError(SAXParseException exception) throws SAXException {
-    println("[fatal] " + exception.getMessage());
+    logParseException("fatal", exception);
 
     withErrors = true;
   }
@@ -85,7 +95,7 @@ public class XMLValidator implements ErrorHandler {
     }
 
     if (schemaFile == null) {
-      println(System.err, "[error] specify schema via -schema=[SCHEMA]");
+      logError("error", "specify schema via -schema=[SCHEMA]");
       System.exit(1);
     }
 
@@ -106,11 +116,11 @@ public class XMLValidator implements ErrorHandler {
       validator.setErrorHandler(handler);
       validator.validate(new StreamSource(inputStream));
 
-      println("result=" + (handler.withErrors ? "WITH_ERRORS" : "OK"));
+      logResult(handler.withErrors ? "WITH_ERRORS" : "OK");
 
     } catch (Exception e) {
-      println("[fatal] " + e.getMessage());
-      println("result=FATAL_ERROR");
+      logError("fatal", e.getMessage());
+      logResult("FATAL_ERROR");
 
       handler.withErrors = true;
     }

@@ -38,6 +38,13 @@ describe('validator', function() {
 
       validator.validateXML(xml, BPMN_SCHEMA, function(err, result) {
         expect(err).toBeDefined();
+
+        // correct error message
+        expect(err.message).toMatch(/Attribute 'unknownAttr' is not allowed to appear in element 'bpmn2:definitions'/);
+
+        // and line number
+        expect(err.message).toMatch(/\(1:476\)/);
+
         done();
       });
     });
