@@ -1,0 +1,11 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Test" type="Max1LengthText"/>
+    <xs:simpleType name="Max1LengthText">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="1"/>
+            <xs:whiteSpace value="collapse"/>
+            <xs:pattern value="\S+.*"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
