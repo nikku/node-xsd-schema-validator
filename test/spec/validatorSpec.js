@@ -39,6 +39,19 @@ describe('validator', function() {
   });
 
 
+  it('should work with xml containing umlaut', function(done) {
+
+    var xml = '<?xml version="1.0" encoding="UTF-8"?>' +
+      '<Test>ü</Test>';
+
+
+    validator.validateXML(xml, 'test/fixtures/xsd/UmlautTest.xsd', function(err, result) {
+      expect(result.valid).toBe(true);
+      done();
+    });
+  });
+
+
   it('should validate incorrect xml', function(done) {
 
     var xml = '<?xml version="1.0" encoding="UTF-8"?>' +
