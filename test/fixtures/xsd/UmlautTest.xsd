@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="Test" type="Max1LengthText"/>
-    <xs:simpleType name="Max1LengthText">
+    <xs:element name="Test" type="Max1LengthTextÜ"/>
+    <xs:simpleType name="Max1LengthTextÜ">
         <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
             <xs:maxLength value="1"/>
