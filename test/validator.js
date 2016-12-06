@@ -37,7 +37,7 @@ describe('validator', function() {
                 '</bpmn2:definitions>';
 
       validator.validateXML(xml, BPMN_SCHEMA, function(err, result) {
-        expect(err).toBeDefined();
+        expect(err).toBeTruthy();
 
         // correct error message
         expect(err.message).toMatch(/Attribute 'unknownAttr' is not allowed to appear in element 'bpmn2:definitions'/);
@@ -106,7 +106,42 @@ describe('validator', function() {
       var xmlStream = fs.createReadStream(INVALID_BPMN_FILE, { encoding: 'UTF-8' });
 
       validator.validateXML(xmlStream, BPMN_SCHEMA, function(err, result) {
-        expect(err).toBeDefined();
+        expect(err).toBeTruthy();
+        done();
+      });
+    });
+
+  });
+
+
+  describe('should validate Buffer', function() {
+
+    it('correct', function(done) {
+
+      var buffer = new Buffer('<?xml version="1.0" encoding="UTF-8"?>' +
+                '<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="simple" targetNamespace="http://activiti.org/bpmn">' +
+                '</bpmn2:definitions>');
+
+      validator.validateXML(buffer, BPMN_SCHEMA, function(err, result) {
+
+        if (err) {
+          done(err);
+        } else {
+          expect(result.valid).toBe(true);
+          done();
+        }
+      });
+    });
+
+
+    it('broken', function(done) {
+
+      var buffer = new Buffer('<?xml version="1.0" encoding="UTF-8"?>' +
+                '<bpmn2:definitions unknownAttr="BOOO" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="simple" targetNamespace="http://activiti.org/bpmn">' +
+                '</bpmn2:definitions>');
+
+      validator.validateXML(buffer, BPMN_SCHEMA, function(err, result) {
+        expect(err).toBeTruthy();
         done();
       });
     });
@@ -133,11 +168,22 @@ describe('validator', function() {
     it('broken', function(done) {
 
       validator.validateXML({ file: INVALID_BPMN_FILE }, BPMN_SCHEMA, function(err, result) {
-        expect(err).toBeDefined();
+        expect(err).toBeTruthy();
         done();
       });
     });
 
   });
 
+  describe('should not validate unsupported type for xml', function() {
+
+    it('correct', function(done) {
+
+      validator.validateXML(['this is not valid'], BPMN_SCHEMA, function(err, result) {
+        expect(err).toBeTruthy();
+        done();
+      });
+    });
+
+  });
 });
