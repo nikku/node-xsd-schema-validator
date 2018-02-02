@@ -202,7 +202,7 @@ describe('validator', function() {
 
       it('valid', function(done) {
 
-        validator.validateXML({ file: 'test/include.xml' }, INCLUDE_SCHEMA, function(err, result) {
+        validator.validateXML({ file: 'test/umlauts.xml' }, INCLUDE_SCHEMA, function(err, result) {
 
           if (err) {
             done(err);
@@ -216,7 +216,7 @@ describe('validator', function() {
 
       it('invalid', function(done) {
 
-        validator.validateXML({ file: 'test/include-invalid.xml' }, INCLUDE_SCHEMA, function(err, result) {
+        validator.validateXML({ file: 'test/umlauts-invalid.xml' }, INCLUDE_SCHEMA, function(err, result) {
           expect(err).to.exist;
           done();
         });
@@ -229,7 +229,7 @@ describe('validator', function() {
 
       it('valid', function(done) {
 
-        validator.validateXML({ file: 'test/import.xml' }, IMPORT_SCHEMA, function(err, result) {
+        validator.validateXML({ file: 'test/umlauts.xml' }, IMPORT_SCHEMA, function(err, result) {
 
           if (err) {
             done(err);
@@ -243,7 +243,7 @@ describe('validator', function() {
 
       it('invalid', function(done) {
 
-        validator.validateXML({ file: 'test/import-invalid.xml' }, IMPORT_SCHEMA, function(err, result) {
+        validator.validateXML({ file: 'test/umlauts-invalid.xml' }, IMPORT_SCHEMA, function(err, result) {
           expect(err).to.exist;
           done();
         });
