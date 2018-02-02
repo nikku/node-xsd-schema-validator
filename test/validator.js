@@ -8,6 +8,7 @@ var BPMN_SCHEMA = 'test/xsd/bpmn/BPMN20.xsd';
 var UMLAUT_SCHEMA = 'test/xsd/Umlauts.xsd';
 var INCLUDE_SCHEMA = 'test/xsd/Include.xsd';
 var IMPORT_SCHEMA = 'test/xsd/Import.xsd';
+var OTHER_SCHEMA = 'test/xsd/Other.xsd';
 
 var BPMN_FILE = 'test/diagram.bpmn';
 var INVALID_BPMN_FILE = 'test/invalid.bpmn';
@@ -247,6 +248,37 @@ describe('validator', function() {
           expect(err).to.exist;
           done();
         });
+      });
+
+    });
+
+
+    describe('with xi:include', function() {
+
+      it('valid', function(done) {
+
+        validator.validateXML({ file: 'test/xi-include.xml' }, OTHER_SCHEMA, function(err, result) {
+
+          if (err) {
+            done(err);
+          } else {
+            expect(result.valid).to.be.true;
+            done();
+          }
+        });
+
+      });
+
+      // TODO(nikku): not supported during validation,
+      // cf. https://github.com/nikku/node-xsd-schema-validator/issues/10
+      it.skip('invalid', function(done) {
+
+        validator.validateXML({ file: 'test/xi-include-invalid.xml' }, OTHER_SCHEMA, function(err, result) {
+
+          expect(err).to.exist;
+          done();
+        });
+
       });
 
     });

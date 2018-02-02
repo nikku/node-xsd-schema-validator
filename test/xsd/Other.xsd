@@ -1,0 +1,9 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://other" targetNamespace="http://other">
+    <xs:element name="Other" type="tOther"/>
+    <xs:complexType name="tOther">
+        <xs:sequence>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:anyAttribute namespace="##other" processContents="lax" />
+    </xs:complexType>
+</xs:schema>
