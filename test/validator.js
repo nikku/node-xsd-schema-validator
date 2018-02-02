@@ -1,4 +1,6 @@
-var validator = require('../lib/validator');
+var validator = require('..');
+
+var expect = require('chai').expect;
 
 var fs = require('fs');
 
@@ -23,7 +25,7 @@ describe('validator', function() {
         if (err) {
           done(err);
         } else {
-          expect(result.valid).toBe(true);
+          expect(result.valid).to.be.true;
           done();
         }
       });
@@ -37,13 +39,13 @@ describe('validator', function() {
                 '</bpmn2:definitions>';
 
       validator.validateXML(xml, BPMN_SCHEMA, function(err, result) {
-        expect(err).toBeTruthy();
+        expect(err).to.exist;
 
         // correct error message
-        expect(err.message).toMatch(/Attribute 'unknownAttr' is not allowed to appear in element 'bpmn2:definitions'/);
+        expect(err.message).match(/Attribute 'unknownAttr' is not allowed to appear in element 'bpmn2:definitions'/);
 
         // and line number
-        expect(err.message).toMatch(/\(1:476\)/);
+        expect(err.message).match(/\(1:476\)/);
 
         done();
       });
@@ -60,7 +62,7 @@ describe('validator', function() {
         if (err) {
           done(err);
         } else {
-          expect(result.valid).toBe(true);
+          expect(result.valid).to.be.true;
           done();
         }
       });
@@ -76,7 +78,7 @@ describe('validator', function() {
         );
 
         validator.validateXML(xml, UMLAUT_SCHEMA, function(err, result) {
-          expect(result.valid).toBe(true);
+          expect(result.valid).to.be.true;
           done();
         });
       });
@@ -89,7 +91,7 @@ describe('validator', function() {
         );
 
         validator.validateXML(xml, UMLAUT_SCHEMA, function(err, result) {
-          expect(result.valid).toBe(false);
+          expect(result.valid).to.be.false;
           done();
         });
       });
@@ -110,7 +112,7 @@ describe('validator', function() {
         if (err) {
           done(err);
         } else {
-          expect(result.valid).toBe(true);
+          expect(result.valid).to.be.true;
           done();
         }
       });
@@ -122,7 +124,7 @@ describe('validator', function() {
       var xmlStream = fs.createReadStream(INVALID_BPMN_FILE, { encoding: 'UTF-8' });
 
       validator.validateXML(xmlStream, BPMN_SCHEMA, function(err, result) {
-        expect(err).toBeTruthy();
+        expect(err).to.exist;
         done();
       });
     });
@@ -143,7 +145,7 @@ describe('validator', function() {
         if (err) {
           done(err);
         } else {
-          expect(result.valid).toBe(true);
+          expect(result.valid).to.be.true;
           done();
         }
       });
@@ -157,7 +159,7 @@ describe('validator', function() {
                 '</bpmn2:definitions>');
 
       validator.validateXML(buffer, BPMN_SCHEMA, function(err, result) {
-        expect(err).toBeTruthy();
+        expect(err).to.exist;
         done();
       });
     });
@@ -176,7 +178,7 @@ describe('validator', function() {
           if (err) {
             done(err);
           } else {
-            expect(result.valid).toBe(true);
+            expect(result.valid).to.be.true;
             done();
           }
         });
@@ -186,7 +188,7 @@ describe('validator', function() {
       it('invalid', function(done) {
 
         validator.validateXML({ file: INVALID_BPMN_FILE }, BPMN_SCHEMA, function(err, result) {
-          expect(err).toBeTruthy();
+          expect(err).to.exist;
           done();
         });
       });
@@ -201,7 +203,7 @@ describe('validator', function() {
     it('valid', function(done) {
 
       validator.validateXML(['this is not valid'], BPMN_SCHEMA, function(err, result) {
-        expect(err).toBeTruthy();
+        expect(err).to.exist;
         done();
       });
     });
