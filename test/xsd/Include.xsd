@@ -1,0 +1,5 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://umlauts"
+           targetNamespace="http://umlauts">
+  <xs:include schemaLocation="Umlauts.xsd" />
+</xs:schema>

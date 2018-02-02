@@ -6,6 +6,8 @@ var fs = require('fs');
 
 var BPMN_SCHEMA = 'test/xsd/bpmn/BPMN20.xsd';
 var UMLAUT_SCHEMA = 'test/xsd/Umlauts.xsd';
+var INCLUDE_SCHEMA = 'test/xsd/Include.xsd';
+var IMPORT_SCHEMA = 'test/xsd/Import.xsd';
 
 var BPMN_FILE = 'test/diagram.bpmn';
 var INVALID_BPMN_FILE = 'test/invalid.bpmn';
@@ -74,7 +76,7 @@ describe('validator', function() {
       it('valid', function(done) {
         var xml = (
           '<?xml version="1.0" encoding="UTF-8"?>' +
-          '<Test>ü</Test>'
+          '<Test xmlns="http://umlauts">ü</Test>'
         );
 
         validator.validateXML(xml, UMLAUT_SCHEMA, function(err, result) {
@@ -87,7 +89,7 @@ describe('validator', function() {
       it('invalid', function(done) {
         var xml = (
           '<?xml version="1.0" encoding="UTF-8"?>' +
-          '<AÖ></AÖ>'
+          '<AÖ xmlns="http://umlauts"></AÖ>'
         );
 
         validator.validateXML(xml, UMLAUT_SCHEMA, function(err, result) {
@@ -188,6 +190,60 @@ describe('validator', function() {
       it('invalid', function(done) {
 
         validator.validateXML({ file: INVALID_BPMN_FILE }, BPMN_SCHEMA, function(err, result) {
+          expect(err).to.exist;
+          done();
+        });
+      });
+
+    });
+
+
+    describe('with include', function() {
+
+      it('valid', function(done) {
+
+        validator.validateXML({ file: 'test/include.xml' }, INCLUDE_SCHEMA, function(err, result) {
+
+          if (err) {
+            done(err);
+          } else {
+            expect(result.valid).to.be.true;
+            done();
+          }
+        });
+      });
+
+
+      it('invalid', function(done) {
+
+        validator.validateXML({ file: 'test/include-invalid.xml' }, INCLUDE_SCHEMA, function(err, result) {
+          expect(err).to.exist;
+          done();
+        });
+      });
+
+    });
+
+
+    describe('with import', function() {
+
+      it('valid', function(done) {
+
+        validator.validateXML({ file: 'test/import.xml' }, IMPORT_SCHEMA, function(err, result) {
+
+          if (err) {
+            done(err);
+          } else {
+            expect(result.valid).to.be.true;
+            done();
+          }
+        });
+      });
+
+
+      it('invalid', function(done) {
+
+        validator.validateXML({ file: 'test/import-invalid.xml' }, IMPORT_SCHEMA, function(err, result) {
           expect(err).to.exist;
           done();
         });
