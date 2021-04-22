@@ -1,6 +1,7 @@
 name: CI
 on: [ push, pull_request ]
 jobs:
+
   Build:
     runs-on: ${{ matrix.os }}
 
@@ -31,6 +32,7 @@ jobs:
       env:
         LOG_DEBUG: 'xsd-schema-validator'
       run: npm run all
+
   Build-Nodes:
     runs-on: ${{ matrix.os }}
 
@@ -61,6 +63,7 @@ jobs:
       env:
         LOG_DEBUG: 'xsd-schema-validator'
       run: npm run all
+
   Build-Platforms:
     runs-on: ${{ matrix.os }}
 
