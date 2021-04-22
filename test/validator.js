@@ -16,10 +16,44 @@ var INVALID_BPMN_FILE = 'test/invalid.bpmn';
 
 describe('validator', function() {
 
+
+  describe('#setup', function() {
+
+    this.timeout(30000);
+
+    beforeEach(cleanup);
+
+
+    it('should pre-compile', function(done) {
+      validator.setup(done);
+    });
+
+
+    it('should compile on the fly (without prior setup)', function(done) {
+
+      // given
+      var xml = '<?xml version="1.0" encoding="UTF-8"?>' +
+                '<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="simple" targetNamespace="http://activiti.org/bpmn">' +
+                '</bpmn2:definitions>';
+
+      validator.validateXML(xml, BPMN_SCHEMA, function(err, result) {
+        if (err) {
+          done(err);
+        } else {
+          expect(result.valid).to.be.true;
+          done();
+        }
+      });
+    });
+
+  });
+
+
   describe('should validate xml string', function() {
 
     it('valid', function(done) {
 
+      // given
       var xml = '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="simple" targetNamespace="http://activiti.org/bpmn">' +
                 '</bpmn2:definitions>';
@@ -344,7 +378,7 @@ describe('validator', function() {
       process.env.JAVA_HOME = '/no-where';
 
       // and no pre-compiled binary exists
-      require('fs').unlinkSync(__dirname + '/../support/XMLValidator.class');
+      cleanup();
 
       // when
       validator.validateXML(validXML, BPMN_SCHEMA, function(err, result) {
@@ -365,4 +399,13 @@ describe('validator', function() {
 
 function createBuffer(str) {
   return 'from' in Buffer ? Buffer.from(str) : new Buffer(str);
+}
+
+function cleanup() {
+  try {
+    require('fs').unlinkSync(__dirname + '/../support/XMLValidator.class');
+  } catch (err) {
+
+    // ignore
+  }
 }
