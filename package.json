@@ -6,7 +6,8 @@
   "scripts": {
     "all": "run-s lint test",
     "lint": "eslint .",
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "node ./lib/post-install.js"
   },
   "repository": {
     "type": "git",
