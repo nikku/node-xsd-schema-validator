@@ -2,24 +2,28 @@
 
 [![CI](https://github.com/nikku/node-xsd-schema-validator/workflows/CI/badge.svg)](https://github.com/nikku/node-xsd-schema-validator/actions?query=workflow%3ACI)
 
-A (XSD) schema validator for [NodeJS](nodejs.org) that uses [Java](https://www.java.com) to perform the actual validation.
+A (XSD) schema validator for [NodeJS](nodejs.org) that uses [Java](https://www.java.com) to perform the actual validation. [:arrow_right: Why?](#why)
 
 
 ## Prerequisites
 
-This utility assumes that `javac` and `java` are on the path _or_ that
-the `JAVA_HOME` environment exists and points to an installed JDK.
+Under the hood, this utility uses Java to do the actual validation. 
+
+It assumes that `javac` and `java` are on the path. If a `JAVA_HOME` environment variable exists it uses that to locate an installed JDK. 
 
 On some platforms, i.e. [Mac OSX](http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/) you need to define `JAVA_HOME` manually.
 
 
-## How to Use
+## Installation
 
-Install via [npm](http://npmjs.org):
+Install the package via [npm](http://npmjs.org):
 
 ```
 npm install --save xsd-schema-validator
 ```
+
+
+## Usage
 
 Use in your application:
 
@@ -37,7 +41,7 @@ validator.validateXML(xmlStr, 'resources/foo.xsd', function(err, result) {
 });
 ```
 
-You may validate readable streams, too:
+You may validate readable streams:
 
 ```javascript
 var xmlStream = fs.createReadableStream('some.xml');
@@ -45,12 +49,11 @@ var xmlStream = fs.createReadableStream('some.xml');
 validator.validateXML(xmlStream, ...);
 ```
 
-...and files, too:
+You may validate files, too:
 
 ```javascript
 validator.validateXML({ file: 'some.xml' }, ...);
 ```
-
 
 ## Why
 
