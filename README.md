@@ -1,6 +1,6 @@
 # xsd-schema-validator
 
-[![Build Status](https://travis-ci.com/nikku/node-xsd-schema-validator.svg?branch=master)](https://travis-ci.com/nikku/node-xsd-schema-validator)
+[![CI](https://github.com/nikku/node-xsd-schema-validator/workflows/CI/badge.svg)](https://github.com/nikku/node-xsd-schema-validator/actions?query=workflow%3ACI)
 
 A (XSD) schema validator for [NodeJS](nodejs.org) that uses [Java](https://www.java.com) to perform the actual validation.
 
