@@ -6,8 +6,12 @@ All notable changes to [node-xsd-schema-validator](https://github.com/nikku/node
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.7.0
+
+* `FEAT`: setup validation helper post install
 * `FEAT`: add validator `#setup` hook
 * `FEAT`: allow debug mode to be toggled via environment variable
+* `FEAT`: gracefully handle missing `java`/`javac`
 
 ## ...
 
