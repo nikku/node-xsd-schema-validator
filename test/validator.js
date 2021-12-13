@@ -321,6 +321,22 @@ describe('validator', function() {
 
     });
 
+
+    describe('invalid path', function() {
+
+      it.skip('valid', function() {
+      });
+
+      it('invalid', function(done) {
+
+        validator.validateXML({ file: 'test/invalid_file_path.xml' }, null, function(err) {
+          expect(err).to.exist;
+          expect(err.message).match(/invalid file path or file does not exist/);
+          done();
+        });
+      });
+
+    });
   });
 
 
