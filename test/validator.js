@@ -328,7 +328,7 @@ describe('validator', function() {
 
     it('valid', function(done) {
 
-      validator.validateXML(['this is not valid'], BPMN_SCHEMA, function(err, result) {
+      validator.validateXML([ 'this is not valid' ], BPMN_SCHEMA, function(err, result) {
         expect(err).to.exist;
         done();
       });
