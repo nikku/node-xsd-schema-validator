@@ -13,6 +13,9 @@
     "type": "git",
     "url": "https://github.com/nikku/node-xsd-schema-validator"
   },
+  "engines": {
+    "node": ">= 16"
+  },
   "keywords": [
     "xsd",
     "xml",
