@@ -32,13 +32,9 @@ var validator = require('xsd-schema-validator');
 
 var xmlStr = '<foo:bar />';
 
-validator.validateXML(xmlStr, 'resources/foo.xsd', function(err, result) {
-  if (err) {
-    throw err;
-  }
+const result = await validator.validateXML(xmlStr, 'resources/foo.xsd');
 
-  result.valid; // true
-});
+result.valid; // true
 ```
 
 You may validate readable streams:
@@ -46,13 +42,13 @@ You may validate readable streams:
 ```javascript
 var xmlStream = fs.createReadableStream('some.xml');
 
-validator.validateXML(xmlStream, ...);
+const result = await validator.validateXML(xmlStream);
 ```
 
 You may validate files, too:
 
 ```javascript
-validator.validateXML({ file: 'some.xml' }, ...);
+const result = validator.validateXML({ file: 'some.xml' }, ...);
 ```
 
 ## Why
