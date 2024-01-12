@@ -32,9 +32,13 @@ var validator = require('xsd-schema-validator');
 
 var xmlStr = '<foo:bar />';
 
-const result = await validator.validateXML(xmlStr, 'resources/foo.xsd');
+try {
+  const result = await validator.validateXML(xmlStr, 'resources/foo.xsd');
 
-result.valid; // true
+  result.valid; // true
+} catch (err) {
+  console.error('validation error', err);
+}
 ```
 
 You may validate readable streams:
