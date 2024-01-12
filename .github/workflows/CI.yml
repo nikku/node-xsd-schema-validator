@@ -7,25 +7,17 @@ jobs:
 
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
-        node-version: [ 14.x ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        node-version: [ 20 ]
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: ${{matrix.node-version}}
-    - name: Cache Node.js modules
-      uses: actions/cache@v2
-      with:
-        # npm cache files are stored in `~/.npm` on Linux/macOS
-        path: ~/.npm
-        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.OS }}-node-
-          ${{ runner.OS }}-
+        cache: 'npm'
     - name: Install dependencies
       run: npm ci
     - name: Build
@@ -39,24 +31,16 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        node-version: [ 10.x, 12.x, 14.x ]
+        node-version: [ 16 ]
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: ${{matrix.node-version}}
-    - name: Cache Node.js modules
-      uses: actions/cache@v2
-      with:
-        # npm cache files are stored in `~/.npm` on Linux/macOS
-        path: ~/.npm
-        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.OS }}-node-
-          ${{ runner.OS }}-
+        cache: 'npm'
     - name: Install dependencies
       run: npm ci
     - name: Build
@@ -70,24 +54,16 @@ jobs:
     strategy:
       matrix:
         os: [ macos-latest, windows-latest ]
-        node-version: [ 14.x ]
+        node-version: [ 20 ]
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: ${{matrix.node-version}}
-    - name: Cache Node.js modules
-      uses: actions/cache@v2
-      with:
-        # npm cache files are stored in `~/.npm` on Linux/macOS
-        path: ~/.npm
-        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.OS }}-node-
-          ${{ runner.OS }}-
+        cache: 'npm'
     - name: Install dependencies
       run: npm ci
     - name: Build
@@ -101,25 +77,17 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        node-version: [14.x]
+        node-version: [ 20 ]
         java-home: [ JAVA_HOME_8_X64, JAVA_HOME_11_X64 ]
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: ${{matrix.node-version}}
-    - name: Cache Node.js modules
-      uses: actions/cache@v2
-      with:
-        # npm cache files are stored in `~/.npm` on Linux/macOS
-        path: ~/.npm
-        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.OS }}-node-
-          ${{ runner.OS }}-
+        cache: 'npm'
     - name: Install dependencies
       run: npm ci
     - name: Set JAVA_HOME
