@@ -6,6 +6,12 @@ All notable changes to [node-xsd-schema-validator](https://github.com/nikku/node
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.8.0
+
+* `FEAT`: change to Promise-based API, drop callbacks
+* `CHORE`: require `node >= 16`
+* `DEPS`: update to `which@4`
+
 ## 0.7.0
 
 * `FEAT`: setup validation helper post install
