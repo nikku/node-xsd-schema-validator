@@ -30,6 +30,6 @@
     "npm-run-all": "^4.1.2"
   },
   "dependencies": {
-    "which": "^2.0.2"
+    "which": "^4.0.0"
   }
 }
