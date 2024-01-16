@@ -26,7 +26,7 @@
   "author": "Nico Rehwaldt <https://github.com/nikku>",
   "license": "MIT",
   "devDependencies": {
-    "chai": "^4.4.1",
+    "chai": "^5.0.0",
     "eslint": "^8.56.0",
     "eslint-plugin-bpmn-io": "^1.0.0",
     "mocha": "^10.2.0",
