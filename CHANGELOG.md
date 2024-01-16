@@ -6,6 +6,10 @@ All notable changes to [node-xsd-schema-validator](https://github.com/nikku/node
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.8.1
+
+* `FIX`: ship `support` folder
+
 ## 0.8.0
 
 * `FEAT`: change to Promise-based API, drop callbacks
