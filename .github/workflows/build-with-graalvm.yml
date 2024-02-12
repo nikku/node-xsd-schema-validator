@@ -1,0 +1,31 @@
+name: GraalVM Native Image builds
+on: [push, pull_request]
+jobs:
+  build:
+    name: XMLValidator on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+
+      - name: Build and run XMLValidator.java
+        run: |
+          cd support
+          javac XMLValidator.java
+          native-image XMLValidator
+          stat ./XMLValidator
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: XMLValidator-${{ matrix.os }}
+          path: XMLValidator*
