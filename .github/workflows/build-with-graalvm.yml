@@ -21,11 +21,12 @@ jobs:
         run: |
           cd support
           javac XMLValidator.java
-          native-image XMLValidator -o XMLValidator
-          stat ./XMLValidator
+          native-image XMLValidator -o bin/XMLValidator
+          stat bin/XMLValidator
 
       - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
           name: XMLValidator-${{ matrix.os }}
-          path: XMLValidator*
+          path: bin/XMLValidator*
+          if-no-files-found: error
