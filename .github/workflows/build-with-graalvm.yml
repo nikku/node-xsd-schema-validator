@@ -21,8 +21,8 @@ jobs:
         run: |
           cd support
           javac XMLValidator.java
-          native-image XMLValidator -o bin/XMLValidator
-          stat bin/XMLValidator
+          native-image XMLValidator -o dist/XMLValidator
+          stat dist/XMLValidator
 
       - name: Upload binary
         uses: actions/upload-artifact@v2
