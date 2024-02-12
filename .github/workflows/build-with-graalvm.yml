@@ -21,7 +21,7 @@ jobs:
         run: |
           cd support
           javac XMLValidator.java
-          native-image XMLValidator
+          native-image XMLValidator -o XMLValidator
           stat ./XMLValidator
 
       - name: Upload binary
