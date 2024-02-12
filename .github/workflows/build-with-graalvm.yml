@@ -28,5 +28,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: XMLValidator-${{ matrix.os }}
-          path: bin/XMLValidator*
+          path: support/dist/XMLValidator*
           if-no-files-found: error
