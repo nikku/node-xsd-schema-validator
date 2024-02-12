@@ -21,10 +21,16 @@ jobs:
         run: |
           cd support
           javac XMLValidator.java
-          native-image XMLValidator -o dist/XMLValidator
+          native-image XMLValidator -o dist/XMLValidator-${{ matrix.os }}
           stat dist/XMLValidator
+      
+      - name: Commit and push binaries
+        run: |
+          git add .
+          git commit -m "build: update binaries for ${{ matrix.os }}"
+          git push
 
-      - name: Upload binary
+      - name: Upload binaries
         uses: actions/upload-artifact@v2
         with:
           name: XMLValidator-${{ matrix.os }}
