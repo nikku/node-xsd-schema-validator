@@ -26,9 +26,10 @@ jobs:
       
       - name: Commit and push binaries
         run: |
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'github-actions@users.noreply.github.com'
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git pull
           git add .
           git commit -m "build: update binaries for ${{ matrix.os }}"
           git push
