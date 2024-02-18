@@ -4,7 +4,8 @@
   "description": "A (XSD) schema validator for nodejs",
   "main": "lib/validator.js",
   "scripts": {
-    "all": "run-s lint test",
+    "all": "run-s lint check-types test",
+    "check-types": "tsc --noEmit",
     "lint": "eslint .",
     "test": "mocha",
     "postinstall": "node ./lib/post-install.js"
@@ -26,11 +27,14 @@
   "author": "Nico Rehwaldt <https://github.com/nikku>",
   "license": "MIT",
   "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.19",
     "chai": "^4.4.1",
     "eslint": "^8.56.0",
     "eslint-plugin-bpmn-io": "^1.0.0",
     "mocha": "^10.2.0",
-    "npm-run-all2": "^6.0.0"
+    "npm-run-all2": "^6.0.0",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "which": "^4.0.0"
