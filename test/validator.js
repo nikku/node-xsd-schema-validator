@@ -446,7 +446,7 @@ describe('validator', function() {
 // helpers ///////////////
 
 function createBuffer(str) {
-  return 'from' in Buffer ? Buffer.from(str) : new Buffer(str);
+  return Buffer.from(str);
 }
 
 function cleanup() {
