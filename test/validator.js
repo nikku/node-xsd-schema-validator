@@ -16,7 +16,6 @@ const INVALID_BPMN_FILE = 'test/invalid.bpmn';
 
 describe('validator', function() {
 
-
   describe('#setup', function() {
 
     this.timeout(30000);
@@ -155,7 +154,7 @@ describe('validator', function() {
     it('valid', async function() {
 
       // given
-      const xmlStream = fs.createReadStream(BPMN_FILE, { encoding: 'UTF-8' });
+      const xmlStream = fs.createReadStream(BPMN_FILE, { encoding: 'utf8' });
 
       // when
       const { valid } = await validator.validateXML(xmlStream, BPMN_SCHEMA);
@@ -168,7 +167,7 @@ describe('validator', function() {
     it('invalid', async function() {
 
       // given
-      const xmlStream = fs.createReadStream(INVALID_BPMN_FILE, { encoding: 'UTF-8' });
+      const xmlStream = fs.createReadStream(INVALID_BPMN_FILE, { encoding: 'utf8' });
 
       let err;
 
@@ -366,6 +365,8 @@ describe('validator', function() {
       let err;
 
       try {
+
+        // @ts-expect-error
         await validator.validateXML([ 'this is not valid' ], BPMN_SCHEMA);
       } catch (_err) {
         err = _err;
