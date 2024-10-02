@@ -6,6 +6,8 @@ All notable changes to [node-xsd-schema-validator](https://github.com/nikku/node
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE`: require Node >= 18
+
 ## 0.9.0
 
 * `FEAT`: add type definitions ([#36](https://github.com/nikku/node-xsd-schema-validator/issues/36), [#37](https://github.com/nikku/node-xsd-schema-validator/pull/37))
