@@ -15,7 +15,7 @@
     "url": "https://github.com/nikku/node-xsd-schema-validator"
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   },
   "keywords": [
     "xsd",
