@@ -28,7 +28,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.11.19",
+    "@types/node": "^22.0.0",
     "chai": "^4.4.1",
     "eslint": "^8.56.0",
     "eslint-plugin-bpmn-io": "^1.0.0",
