@@ -6,6 +6,10 @@ All notable changes to [node-xsd-schema-validator](https://github.com/nikku/node
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.10.0
+
+* `CHORE`: simplify path resolution
+* `CHORE`: log setup error with human readable message
 * `CHORE`: require Node >= 18
 
 ## 0.9.0
