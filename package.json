@@ -1,6 +1,6 @@
 {
   "name": "xsd-schema-validator",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "A (XSD) schema validator for nodejs",
   "main": "lib/validator.js",
   "scripts": {
