@@ -440,6 +440,47 @@ describe('validator', function() {
 
   });
 
+
+  describe('should validate example schemata', function() {
+
+    const MDFE_SCHEMA = 'test/xsd/mdfe/mdfe_v3.00.xsd';
+    const VALID_MDFE_FILE = 'test/mdfe.xml';
+    const INVALID_MDFE_FILE = 'test/mdfe-invalid.xml';
+
+
+    describe('MDFE (recursively expanding schema) in insecure mode', function() {
+
+      it('valid', async function() {
+
+        // when
+        const { valid } = await validator.validateXML({ file: VALID_MDFE_FILE }, MDFE_SCHEMA, { insecure: true });
+
+        // then
+        expect(valid).to.be.true;
+      });
+
+
+      it('invalid', async function() {
+
+        let err;
+
+        // when
+        try {
+          await validator.validateXML({ file: INVALID_MDFE_FILE }, MDFE_SCHEMA, { insecure: true });
+        } catch (_err) {
+          err = _err;
+        }
+
+        // then
+        expect(err).to.exist;
+        expect(err.valid).to.be.false;
+        expect(err.result).to.eql('WITH_ERRORS');
+      });
+
+    });
+
+  });
+
 });
 
 
