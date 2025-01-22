@@ -9,9 +9,12 @@ const UMLAUT_SCHEMA = 'test/xsd/Umlauts.xsd';
 const INCLUDE_SCHEMA = 'test/xsd/Include.xsd';
 const IMPORT_SCHEMA = 'test/xsd/Import.xsd';
 const OTHER_SCHEMA = 'test/xsd/Other.xsd';
+const MDFE_SCHEMA = 'test/xsd/mdfe_v3.00.xsd';
 
 const BPMN_FILE = 'test/diagram.bpmn';
 const INVALID_BPMN_FILE = 'test/invalid.bpmn';
+const MDFE_FILE = 'test/mdfe.xml';
+const INVALID_MDFE_FILE = 'test/mdfe-invalid.xml';
 
 
 describe('validator', function() {
@@ -436,6 +439,31 @@ describe('validator', function() {
 
       // then
       expect(err).to.exist;
+    });
+
+  });
+
+  describe('should validate xml using xsd with 5k+ nodes', function() {
+
+    it('valid', async function() {
+
+      const { valid } = await validator.validateXML({ file: MDFE_FILE }, MDFE_SCHEMA);
+
+      expect(valid).to.be.true;
+    });
+
+
+    it('invalid', async function() {
+
+      let err;
+      try {
+        await validator.validateXML({ file: INVALID_MDFE_FILE }, MDFE_SCHEMA);
+      } catch (_err) {
+        err = _err;
+      }
+
+      expect(err).to.exist;
+      expect(err.valid).to.be.false;
     });
 
   });
