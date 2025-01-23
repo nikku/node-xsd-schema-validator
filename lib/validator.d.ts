@@ -8,7 +8,10 @@ export type ValidateResult = {
 
 export function validateXML(
     xml: string | Buffer| ReadableStream | { file: string },
-    pathToXsd: string
+    pathToXsd: string,
+    options?: {
+        insecure?: boolean
+    }
 ): Promise<ValidateResult>;
 
 /**
