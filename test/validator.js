@@ -2,7 +2,7 @@ const validator = require('..');
 
 const { expect } = require('chai');
 
-const fs = require('fs');
+const { createReadStream } = require('node:fs');
 
 const BPMN_SCHEMA = 'test/xsd/bpmn/BPMN20.xsd';
 const UMLAUT_SCHEMA = 'test/xsd/Umlauts.xsd';
@@ -154,7 +154,7 @@ describe('validator', function() {
     it('valid', async function() {
 
       // given
-      const xmlStream = fs.createReadStream(BPMN_FILE, { encoding: 'utf8' });
+      const xmlStream = createReadStream(BPMN_FILE, { encoding: 'utf8' });
 
       // when
       const { valid } = await validator.validateXML(xmlStream, BPMN_SCHEMA);
@@ -167,7 +167,7 @@ describe('validator', function() {
     it('invalid', async function() {
 
       // given
-      const xmlStream = fs.createReadStream(INVALID_BPMN_FILE, { encoding: 'utf8' });
+      const xmlStream = createReadStream(INVALID_BPMN_FILE, { encoding: 'utf8' });
 
       let err;
 

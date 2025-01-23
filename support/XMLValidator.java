@@ -69,8 +69,14 @@ public class XMLValidator implements ErrorHandler {
     withErrors = true;
   }
 
-  private static Schema loadSchema(String fileName) throws Exception {
+  private static Schema loadSchema(String fileName, boolean insecure) throws Exception {
+
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+    if (insecure) {
+      sf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, false);
+    }
+
     Schema schema = sf.newSchema(new File(fileName));
 
     return schema;
@@ -81,8 +87,13 @@ public class XMLValidator implements ErrorHandler {
     boolean readStdin = false;
     String fileName = null;
     String schemaFile = null;
+    boolean insecure = false;
 
     for (String str: args) {
+      if ("-insecure".equals(str)) {
+        insecure = true;
+      }
+
       if ("-stdin".equals(str)) {
         readStdin = true;
       } else
@@ -110,7 +121,7 @@ public class XMLValidator implements ErrorHandler {
     XMLValidator handler = new XMLValidator();
 
     try {
-      Schema schema = loadSchema(schemaFile);
+      Schema schema = loadSchema(schemaFile, insecure);
       Validator validator = schema.newValidator();
 
       validator.setErrorHandler(handler);
