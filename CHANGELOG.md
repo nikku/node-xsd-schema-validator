@@ -6,6 +6,10 @@ All notable changes to [node-xsd-schema-validator](https://github.com/nikku/node
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.11.0
+
+* `FEAT`: add `insecure` option to be able to parse huge schemata ([#44](https://github.com/nikku/node-xsd-schema-validator/issues/44))
+
 ## 0.10.0
 
 * `CHORE`: simplify path resolution
