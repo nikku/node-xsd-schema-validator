@@ -33,7 +33,7 @@
     "eslint": "^9.18.0",
     "eslint-plugin-bpmn-io": "^2.1.0",
     "mocha": "^10.8.2",
-    "npm-run-all2": "^7.0.2",
+    "npm-run-all2": "^8.0.0",
     "typescript": "^5.7.3"
   },
   "dependencies": {
