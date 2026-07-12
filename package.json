@@ -34,7 +34,7 @@
     "eslint-plugin-bpmn-io": "^2.1.0",
     "mocha": "^11.0.0",
     "npm-run-all2": "^9.0.0",
-    "typescript": "^5.7.3"
+    "typescript": "^6.0.0"
   },
   "dependencies": {
     "which": "^7.0.0"
